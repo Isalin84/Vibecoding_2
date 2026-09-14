@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b1d3a">
+<title>Варя и Винни: два настоящих времени</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;600;700&family=Nunito:wght@500;600;700;800;900&display=swap');
+:root{--navy:#0b1d3a;--blue:#174a7c;--sky:#eaf6ff;--gold:#e5aa28;--orange:#e98537;--fur:#c96e32;--cream:#fff8e8;--ink:#17243a;--muted:#657087;--green:#21866f;--red:#c94747;--white:#fff;--line:#dce4ed;--shadow:0 12px 35px rgba(11,29,58,.12)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:linear-gradient(180deg,#f4faff 0,#fffaf1 68%,#f7fbff);color:var(--ink);font-family:Nunito,system-ui,sans-serif;font-size:17px;min-height:100vh}
+button,input{font:inherit}
+button{cursor:pointer}
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.topin{max-width:1080px;margin:auto;padding:11px 22px;display:flex;align-items:center;gap:16px}
+.brand{font-family:Comfortaa;font-weight:700;color:var(--navy);white-space:nowrap}
+.brand span{color:var(--orange)}
+.progress{height:10px;flex:1;background:#e8eef5;border-radius:99px;overflow:hidden}
+.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--orange));border-radius:inherit;transition:.4s}
+.stars{font-weight:900;color:#8c5a00;white-space:nowrap}
+main{max-width:1080px;margin:auto;padding:34px 22px 70px}
+.screen{display:none;animation:up .35s ease}
+.screen.active{display:block}
+@keyframes up{from{opacity:0;transform:translateY(10px)}}
+.hero{display:grid;grid-template-columns:1.45fr .75fr;gap:26px;align-items:center;background:var(--navy);color:white;border-radius:30px;padding:38px;overflow:hidden;position:relative;box-shadow:var(--shadow)}
+.hero:after{content:"";position:absolute;width:300px;height:300px;border-radius:50%;right:-90px;top:-135px;background:#ffffff12}
+.eyebrow{display:inline-flex;gap:8px;align-items:center;text-transform:uppercase;letter-spacing:.1em;font-size:.78rem;font-weight:900;color:#ffd77a}
+h1,h2,h3{font-family:Comfortaa;line-height:1.2}
+h1{font-size:clamp(2rem,5vw,3.8rem);margin:12px 0 14px}
+h2{font-size:clamp(1.7rem,4vw,2.7rem);color:var(--navy);margin:0 0 12px}
+h3{margin:0 0 8px}
+.hero p{max-width:600px;font-size:1.1rem;line-height:1.55;color:#d9eaff}
+.dogcard{position:relative;text-align:center;background:#fff;border-radius:25px;color:var(--navy);padding:24px 16px;transform:rotate(2deg);box-shadow:0 15px 40px #0004}
+.dog{font-size:6rem;line-height:1;filter:drop-shadow(0 8px 4px #0002);animation:float 3s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-6px) rotate(-2deg)}}
+.speech{background:var(--cream);border:2px solid #f1dca7;border-radius:18px;padding:12px;font-weight:800;margin-top:12px}
+.primary,.secondary,.sound{border:0;border-radius:14px;padding:13px 20px;font-weight:900;transition:.18s}
+.primary{background:var(--gold);color:#281b00;box-shadow:0 5px 0 #a56d00}
+.primary:hover{transform:translateY(-2px);box-shadow:0 7px 0 #a56d00}
+.primary:active{transform:translateY(3px);box-shadow:0 2px 0 #a56d00}
+.secondary{background:#edf3f8;color:var(--navy);border:1px solid #d7e2ed}
+.sound{padding:8px 12px;background:#e8f5ff;color:var(--blue)}
+.cta{margin-top:22px}
+.intro{max-width:760px;margin-bottom:25px;color:var(--muted);font-size:1.08rem}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.rule{background:white;border:2px solid var(--line);border-radius:24px;padding:24px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.rule.simple{border-top:8px solid var(--gold)}.rule.cont{border-top:8px solid #46a9df}
+.badge{display:inline-block;border-radius:99px;padding:5px 10px;font-size:.8rem;font-weight:900}
+.simple .badge{background:#fff0b9;color:#6d4b00}.cont .badge{background:#dbf2ff;color:#06577e}
+.formula{font-family:Comfortaa;background:#f4f7fa;padding:13px;border-radius:13px;margin:14px 0;font-weight:700}
+.example{display:flex;align-items:center;justify-content:space-between;gap:8px;background:#fbfcfd;border:1px dashed #cbd6e1;border-radius:13px;padding:11px;margin-top:9px}
+.clues{display:flex;flex-wrap:wrap;gap:8px;margin-top:15px}
+.clue{padding:6px 10px;border-radius:9px;background:#f0f3f7;font-size:.9rem;font-weight:800}
+.tip{margin:20px 0;background:#fff8dd;border-left:6px solid var(--gold);padding:16px 18px;border-radius:12px}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:28px}
+.quest{background:white;border-radius:25px;padding:26px;box-shadow:var(--shadow);border:1px solid var(--line);margin:15px 0}
+.qnum{font-size:.83rem;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.08em}
+.question{font-size:1.25rem;font-weight:900;margin:8px 0 14px}
+.options{display:grid;gap:10px}
+.option{width:100%;text-align:left;border:2px solid var(--line);background:white;border-radius:14px;padding:13px 15px;color:var(--ink);font-weight:800}
+.option:hover{border-color:#99bbd8;background:#f6fbff}
+.option.selected{border-color:var(--blue);background:#eaf6ff}
+.option.correct{border-color:var(--green);background:#e9faf5;color:#145d4e}
+.option.wrong{border-color:var(--red);background:#fff0f0;color:#8b2929}
+.feedback{min-height:28px;margin-top:12px;font-weight:800}
+.feedback.good{color:var(--green)}.feedback.bad{color:var(--red)}
+.sortbox{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.sortchoice{border:2px solid var(--line);background:white;border-radius:16px;padding:14px;font-weight:900}
+.sortchoice:first-child:hover{border-color:var(--gold)}.sortchoice:last-child:hover{border-color:#46a9df}
+.counter{text-align:center;color:var(--muted);font-weight:800;margin:10px}
+.story{background:white;border-radius:25px;padding:28px;box-shadow:var(--shadow);font-size:1.15rem;line-height:2}
+.story select{padding:7px 9px;border:2px solid #a9bed0;border-radius:10px;background:#f8fcff;color:var(--navy);font-weight:800}
+.story select.ok{border-color:var(--green);background:#e9faf5}.story select.no{border-color:var(--red);background:#fff0f0}
+.result{text-align:center;background:var(--navy);color:white;border-radius:28px;padding:38px;box-shadow:var(--shadow)}
+.result h2{color:white}.bigstar{font-size:5rem}.result p{color:#dbe9f8}
+.stepdots{display:flex;justify-content:center;gap:8px;margin:24px 0}
+.stepdots button{width:12px;height:12px;padding:0;border:0;border-radius:50%;background:#cbd6e1}.stepdots button.on{background:var(--orange);transform:scale(1.3)}
+.mini{font-size:.9rem;color:var(--muted)}
+.nameinput{padding:12px 14px;border-radius:13px;border:2px solid #c5d1dc;max-width:220px}
+.hidden{display:none!important}
+.confetti{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:99}.confetti b{position:absolute;top:-20px;animation:fall 2.5s linear forwards}@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+@media(max-width:720px){body{font-size:16px}.topin{padding:9px 14px}.brand{font-size:.9rem}.hero{grid-template-columns:1fr;padding:27px 22px}.dogcard{display:none}.grid2,.sortbox{grid-template-columns:1fr}main{padding:24px 14px 55px}.rule,.quest,.story{padding:19px}.nav{flex-wrap:wrap}.nav button{flex:1}.stars{font-size:.9rem}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header class="top"><div class="topin"><div class="brand">Варя <span>&</span> Винни</div><div class="progress" aria-label="Прогресс"><i id="bar"></i></div><div class="stars">⭐ <span id="score">0</span></div></div></header>
+<main>
+<section class="screen active" data-page="0">
+ <div class="hero">
+  <div><div class="eyebrow">🐾 Английский квест · 25 минут</div><h1>Два настоящих времени</h1><p>Винни поможет понять, когда говорить <b>I play</b>, а когда — <b>I am playing</b>. Никакой скучной зубрёжки: слушай, выбирай и собирай историю.</p>
+  <div class="cta"><label for="pname">Как тебя зовут?</label><br><input id="pname" class="nameinput" value="Варя" maxlength="18"> <button class="primary" onclick="go(1)">Начать квест →</button></div></div>
+  <div class="dogcard"><div class="dog" role="img" aria-label="Рыжий той-пудель">🐩</div><div class="speech">Woof! I am ready.<br><span class="mini">Гав! Я готов.</span></div></div>
+ </div>
+</section>
+
+<section class="screen" data-page="1">
+ <div class="eyebrow" style="color:#976300">Уровень 1 · Секрет Винни</div><h2>Обычно или прямо сейчас?</h2><p class="intro">Это главный вопрос. Сначала выбери смысл — и только потом форму глагола.</p>
+ <div class="grid2">
+  <article class="rule simple"><span class="badge">ОБЫЧНО</span><h3>Present Simple</h3><p>Привычки, факты, расписание. То, что бывает регулярно.</p><div class="formula">I / You / We / They + play<br>He / She / It + play<b>s</b></div>
+   <div class="example"><span>Winnie <b>plays</b> every day.</span><button class="sound" onclick="speak('Winnie plays every day.')">🔊</button></div>
+   <div class="example"><span>He <b>likes</b> treats.</span><button class="sound" onclick="speak('He likes treats.')">🔊</button></div>
+   <div class="clues"><span class="clue">every day</span><span class="clue">usually</span><span class="clue">always</span><span class="clue">on Mondays</span></div>
+  </article>
+  <article class="rule cont"><span class="badge">СЕЙЧАС</span><h3>Present Continuous</h3><p>Действие идёт прямо сейчас или временно в эти дни.</p><div class="formula">am / is / are + verb<b>-ing</b><br>I am · He is · We are</div>
+   <div class="example"><span>Winnie <b>is playing</b> now.</span><button class="sound" onclick="speak('Winnie is playing now.')">🔊</button></div>
+   <div class="example"><span>He <b>is eating</b> a treat.</span><button class="sound" onclick="speak('He is eating a treat.')">🔊</button></div>
+   <div class="clues"><span class="clue">now</span><span class="clue">right now</span><span class="clue">at the moment</span><span class="clue">Look!</span></div>
+  </article>
+ </div>
+ <div class="tip"><b>🐩 Подсказка Винни:</b> фраза «сейчас» — это не перевод слова <i>now</i>, а смысл. <i>Look! Winnie is running!</i> — даже без <i>now</i> действие видно в эту секунду.</div>
+ <div class="nav"><button class="secondary" onclick="go(0)">← Назад</button><button class="primary" onclick="go(2)">Проверим нюх →</button></div>
+</section>
+
+<section class="screen" data-page="2">
+ <div class="eyebrow" style="color:#976300">Уровень 2 · Две миски</div><h2>Разложи фразы по смыслу</h2><p class="intro">Прочитай ситуацию и реши: это привычка или действие сейчас?</p>
+ <div class="quest"><div class="qnum" id="sortnum"></div><div class="question" id="sorttext"></div><div class="sortbox"><button class="sortchoice" onclick="sortAnswer('simple')">☀️ Обычно<br><small>Present Simple</small></button><button class="sortchoice" onclick="sortAnswer('continuous')">⚡ Прямо сейчас<br><small>Present Continuous</small></button></div><div id="sortfb" class="feedback"></div></div>
+ <div class="counter" id="sortcount"></div>
+ <div class="nav"><button class="secondary" onclick="go(1)">← Правило</button><button id="sortnext" class="primary hidden" onclick="go(3)">Следующий уровень →</button></div>
+</section>
+
+<section class="screen" data-page="3">
+ <div class="eyebrow" style="color:#976300">Уровень 3 · Выбери форму</div><h2>Что делает Винни?</h2><p class="intro">Нажми на правильный вариант. Можно включить английскую озвучку после ответа.</p>
+ <div id="quiz"></div>
+ <div class="nav"><button class="secondary" onclick="go(2)">← Две миски</button><button id="quiznext" class="primary hidden" onclick="go(4)">Искать ошибки →</button></div>
+</section>
+
+<section class="screen" data-page="4">
+ <div class="eyebrow" style="color:#976300">Уровень 4 · Детектив</div><h2>Поймай ошибку</h2><p class="intro">Винни оставил следы. Выбери предложение без ошибки.</p>
+ <div id="detective"></div>
+ <div class="nav"><button class="secondary" onclick="go(3)">← Формы</button><button id="detnext" class="primary hidden" onclick="go(5)">Финальная история →</button></div>
+</section>
+
+<section class="screen" data-page="5">
+ <div class="eyebrow" style="color:#976300">Финал · День Винни</div><h2>Собери историю</h2><p class="intro">Выбери формы глаголов. Смотри на слова‑маячки и смысл.</p>
+ <div class="story">
+  Every morning, Winnie <select data-a="wakes up"><option>— выбери —</option><option>wakes up</option><option>is waking up</option></select> at seven. He usually
+  <select data-a="eats"><option>— выбери —</option><option>eats</option><option>is eating</option></select> breakfast with Varya. But look! Right now he
+  <select data-a="is carrying"><option>— выбери —</option><option>carries</option><option>is carrying</option></select> his favourite ball. Varya
+  <select data-a="is putting on"><option>— выбери —</option><option>puts on</option><option>is putting on</option></select> her jacket at the moment. They
+  <select data-a="walk"><option>— выбери —</option><option>walk</option><option>are walking</option></select> in the park every evening.
+  <div style="margin-top:18px"><button class="primary" onclick="checkStory()">Проверить историю</button> <button class="sound" onclick="speakStory()">🔊 Послушать</button></div>
+  <div id="storyfb" class="feedback"></div>
+ </div>
+ <div class="nav"><button class="secondary" onclick="go(4)">← Детектив</button><button id="finish" class="primary hidden" onclick="go(6)">Узнать результат →</button></div>
+</section>
+
+<section class="screen" data-page="6">
+ <div class="result"><div class="bigstar">🏆</div><h2 id="resultTitle">Миссия выполнена!</h2><p id="resultText"></p><div class="speech" style="color:var(--navy);max-width:580px;margin:20px auto"><b>Суперправило:</b><br>обычно → <b>Present Simple</b><br>прямо сейчас → <b>am / is / are + -ing</b></div><button class="primary" onclick="restart()">Пройти ещё раз</button></div>
+</section>
+<div class="stepdots" id="dots"></div>
+</main>
+<div class="confetti" id="confetti"></div>
+<script>
+const sortQs=[
+ {t:'Винни гуляет с Варей каждый вечер.',a:'simple',why:'Каждый вечер — это привычка.'},
+ {t:'Смотри! Винни прыгает за мячом.',a:'continuous',why:'Смотри! Действие идёт сейчас.'},
+ {t:'Той-пудели — умные собаки.',a:'simple',why:'Это общий факт.'},
+ {t:'Сегодня Винни спит в кресле.',a:'continuous',why:'Сегодня — временная ситуация.'},
+ {t:'По воскресеньям Варя учит английский.',a:'simple',why:'По воскресеньям — регулярно.'},
+ {t:'Тише! Винни сейчас слушает.',a:'continuous',why:'Действие происходит в эту минуту.'}
+];
+const quizQs=[
+ {q:'Winnie ___ in the park every day.',o:['runs','is running'],a:0,e:'every day → привычка: runs'},
+ {q:'Listen! Winnie ___ at the door.',o:['barks','is barking'],a:1,e:'Listen! → сейчас: is barking'},
+ {q:'Varya usually ___ Winnie after school.',o:['walks','is walking'],a:0,e:'usually → регулярно: walks'},
+ {q:'I ___ my English exercise now.',o:['do','am doing'],a:1,e:'now → am doing'},
+ {q:'Winnie ___ two small ears.',o:['has','is having'],a:0,e:'Обладание — факт: has'},
+ {q:'We ___ a funny video at the moment.',o:['watch','are watching'],a:1,e:'at the moment → are watching'}
+];
+const detQs=[
+ {q:'Каждый день:',o:['Winnie eat breakfast at seven.','Winnie eats breakfast at seven.'],a:1,e:'После he / she / it добавляем -s: eats.'},
+ {q:'Прямо сейчас:',o:['Varya is play with Winnie.','Varya is playing with Winnie.'],a:1,e:'После is нужен глагол с -ing.'},
+ {q:'По понедельникам:',o:['They go to English class.','They are go to English class.'],a:0,e:'Привычка: Present Simple без are.'},
+ {q:'Смотри!',o:['Winnie running fast!','Winnie is running fast!'],a:1,e:'В Continuous нельзя потерять is.'}
+];
+let state={page:0,score:0,sort:0,sortDone:false,quiz:{},det:{},story:false};
+try{state={...state,...JSON.parse(localStorage.getItem('varyaGrammar')||'{}')}}catch(e){}
+function save(){localStorage.setItem('varyaGrammar',JSON.stringify(state))}
+function renderTop(){document.getElementById('score').textContent=state.score;document.getElementById('bar').style.width=(state.page/6*100)+'%';document.querySelectorAll('#dots button').forEach((d,i)=>d.classList.toggle('on',i===state.page))}
+function go(n){state.page=n;save();document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('active',+s.dataset.page===n));window.scrollTo({top:0});renderTop();if(n===6)finish()}
+function speak(text){if(!('speechSynthesis'in window)){alert('В этом браузере озвучка не поддерживается.');return}speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang='en-GB';u.rate=.82;speechSynthesis.speak(u)}
+function addScore(n){state.score+=n;save();renderTop()}
+function sortRender(){const q=sortQs[state.sort];document.getElementById('sortnum').textContent='Карточка '+(state.sort+1)+' из '+sortQs.length;document.getElementById('sorttext').textContent=q.t;document.getElementById('sortfb').textContent='';document.getElementById('sortfb').className='feedback';document.getElementById('sortcount').textContent='Разложено: '+state.sort+' / '+sortQs.length}
+function sortAnswer(a){const q=sortQs[state.sort],fb=document.getElementById('sortfb');if(fb.textContent)return;if(a===q.a){fb.textContent='Верно! '+q.why;fb.className='feedback good';addScore(1)}else{fb.textContent='Почти! '+q.why;fb.className='feedback bad'}setTimeout(()=>{state.sort++;if(state.sort>=sortQs.length){state.sort=sortQs.length;state.sortDone=true;document.getElementById('sorttext').textContent='Все карточки на месте! 🐾';document.querySelector('.sortbox').classList.add('hidden');document.getElementById('sortnext').classList.remove('hidden');document.getElementById('sortfb').textContent='';document.getElementById('sortcount').textContent='Разложено: 6 / 6'}else sortRender();save()},900)}
+function cards(list,target,key,next){const root=document.getElementById(target);root.innerHTML=list.map((x,i)=>'<div class="quest"><div class="qnum">Задание '+(i+1)+' из '+list.length+'</div><div class="question">'+x.q+'</div><div class="options">'+x.o.map((o,j)=>'<button class="option" data-i="'+i+'" data-j="'+j+'" onclick="pick(\''+key+'\','+i+','+j+')">'+o+'</button>').join('')+'</div><div class="feedback" id="'+key+'fb'+i+'"></div></div>').join('');Object.keys(state[key]||{}).forEach(i=>paint(key,+i,state[key][i],list));if(Object.keys(state[key]||{}).length===list.length)document.getElementById(next).classList.remove('hidden')}
+function pick(key,i,j){if(state[key][i]!==undefined)return;state[key][i]=j;const list=key==='quiz'?quizQs:detQs;if(j===list[i].a)addScore(1);paint(key,i,j,list);save();const next=key==='quiz'?'quiznext':'detnext';if(Object.keys(state[key]).length===list.length)document.getElementById(next).classList.remove('hidden')}
+function paint(key,i,j,list){document.querySelectorAll('#'+(key==='quiz'?'quiz':'detective')+' .option[data-i="'+i+'"]').forEach((b,k)=>b.classList.add(k===list[i].a?'correct':k===j?'wrong':''));const good=j===list[i].a,fb=document.getElementById(key+'fb'+i);fb.textContent=(good?'Верно! ':'Попробуй запомнить: ')+list[i].e;fb.className='feedback '+(good?'good':'bad');if(key==='quiz')fb.innerHTML+=' <button class="sound" onclick="speak(\''+list[i].q.replace('___',list[i].o[list[i].a])+'\')">🔊</button>'}
+function checkStory(){let all=true,correct=0;document.querySelectorAll('.story select').forEach(s=>{const ok=s.value===s.dataset.a;s.className=ok?'ok':'no';if(ok)correct++;else all=false});const fb=document.getElementById('storyfb');fb.textContent=all?'Идеально! История готова. Винни машет хвостом!':'Есть '+(5-correct)+' неточност'+(5-correct===1?'ь':'и')+'. Красная рамка подскажет, где проверить ещё раз.';fb.className='feedback '+(all?'good':'bad');if(all&&!state.story){state.story=true;addScore(5)}document.getElementById('finish').classList.toggle('hidden',!all);save()}
+function speakStory(){speak('Every morning, Winnie wakes up at seven. He usually eats breakfast with Varya. But look! Right now he is carrying his favourite ball. Varya is putting on her jacket at the moment. They walk in the park every evening.')}
+function finish(){const name=(document.getElementById('pname').value||'Варя').trim();localStorage.setItem('varyaName',name);document.getElementById('resultTitle').textContent=name+', миссия выполнена!';const max=21;document.getElementById('resultText').innerHTML='Ты набрала <b>'+state.score+' из '+max+' звёзд</b>.<br>'+(state.score>=18?'Ты отлично различаешь два времени!':state.score>=15?'Ты поняла главное. Ещё один круг — и будет идеально!':'Главный секрет уже найден. Повтори квест и собери больше звёзд!');confetti()}
+function confetti(){const c=document.getElementById('confetti');c.innerHTML='';for(let i=0;i<32;i++){const b=document.createElement('b');b.textContent=['⭐','🐾','●'][i%3];b.style.left=Math.random()*100+'%';b.style.animationDelay=Math.random()*.8+'s';b.style.color=['#e5aa28','#e98537','#46a9df'][i%3];c.appendChild(b)}setTimeout(()=>c.innerHTML='',3500)}
+function restart(){localStorage.removeItem('varyaGrammar');state={page:0,score:0,sort:0,sortDone:false,quiz:{},det:{},story:false};document.querySelector('.sortbox').classList.remove('hidden');document.getElementById('sortnext').classList.add('hidden');document.getElementById('quiznext').classList.add('hidden');document.getElementById('detnext').classList.add('hidden');document.getElementById('finish').classList.add('hidden');document.querySelectorAll('.story select').forEach(s=>{s.selectedIndex=0;s.className=''});cards(quizQs,'quiz','quiz','quiznext');cards(detQs,'detective','det','detnext');sortRender();go(0)}
+document.getElementById('pname').value=localStorage.getItem('varyaName')||'Варя';
+document.getElementById('dots').innerHTML=Array.from({length:7},(_,i)=>'<button aria-label="Страница '+(i+1)+'" onclick="go('+i+')"></button>').join('');
+cards(quizQs,'quiz','quiz','quiznext');cards(detQs,'detective','det','detnext');
+if(state.sortDone){
+ document.getElementById('sorttext').textContent='Все карточки на месте! 🐾';
+ document.querySelector('.sortbox').classList.add('hidden');
+ document.getElementById('sortnext').classList.remove('hidden');
+ document.getElementById('sortcount').textContent='Разложено: 6 / 6';
+}else{sortRender()}
+go(state.page||0);
+</script>
+</body>
+</html>
